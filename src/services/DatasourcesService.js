@@ -1,12 +1,24 @@
-const Datasource = require('../models/Datasource');
-const { ObjectNotFound, ObjectNotSupported } = require('../models/Exceptions');
+const Datasource = require('../src/models/Datasource');
+const { ObjectNotFound, ObjectNotSupported } = require('../src/models/Exceptions');
 
+/**
+ * Service for managing Datasources.
+ */
 class DatasourcesService {
+    /**
+     * @param {Object} api - The API client instance.
+     */
     constructor(api) {
         this.api = api;
     }
 
-    // Create a new datasource
+    /**
+     * Create a new datasource.
+     * @param {Object} dsConfig - The configuration for the datasource.
+     * @param {boolean} [replace=false] - Whether to replace an existing datasource.
+     * @returns {Promise<Datasource>} - The created Datasource.
+     * @throws {ObjectNotFound} - If the datasource to replace does not exist.
+     */
     async create(dsConfig, replace = false) {
         const name = dsConfig.name;
 
@@ -25,10 +37,13 @@ class DatasourcesService {
         return this.get(name);
     }
 
-    // List all datasources
+    /**
+     * List all datasources.
+     * @returns {Promise<Datasource[]>} - An array of Datasources.
+     */
     async list() {
         const response = await this.api.get('/datasources');
-        const data = response.data;  // Ensure we access the response data correctly
+        const data = response.data;
         const dsList = [];
 
         for (const item of data) {
@@ -39,10 +54,15 @@ class DatasourcesService {
         return dsList;
     }
 
-    // Get a datasource by name
+    /**
+     * Get a datasource by name.
+     * @param {string} name - The name of the datasource.
+     * @returns {Promise<Datasource>} - The requested Datasource.
+     * @throws {ObjectNotSupported} - If the datasource type is not supported.
+     */
     async get(name) {
         const response = await this.api.get(`/datasources/${name}`);
-        const data = response.data;  // Ensure we access the response data correctly
+        const data = response.data;
 
         if (!data.engine) {
             throw new ObjectNotSupported(`Wrong type of datasource: ${name}`);
@@ -51,7 +71,11 @@ class DatasourcesService {
         return new Datasource(data);
     }
 
-    // Drop (delete) a datasource by name
+    /**
+     * Drop (delete) a datasource by name.
+     * @param {string} name - The name of the datasource to delete.
+     * @returns {Promise<void>}
+     */
     async drop(name) {
         await this.api.delete(`/datasources/${name}`);
     }

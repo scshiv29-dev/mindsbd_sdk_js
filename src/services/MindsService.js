@@ -1,4 +1,4 @@
-const Mind = require('../models/Mind');
+const Mind = require('../src/models/Mind');
 
 class MindsService {
     constructor(api) {

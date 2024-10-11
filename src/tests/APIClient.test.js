@@ -1,5 +1,5 @@
 
-const APIClient = require('../../services/client/APIClient');
+const APIClient = require('../services/client/APIClient');
 const axios = require('axios');
 const { ObjectNotFound, Forbidden, Unauthorized, UnknownError } = require('../models/Exceptions');
 

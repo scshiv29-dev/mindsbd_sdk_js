@@ -1,4 +1,6 @@
-
+/**
+ * Represents an error when an object is not found.
+ */
 class ObjectNotFound extends Error {
     constructor(message) {
         super(message);
@@ -6,6 +8,9 @@ class ObjectNotFound extends Error {
     }
 }
 
+/**
+ * Represents an error when access is forbidden.
+ */
 class Forbidden extends Error {
     constructor(message) {
         super(message);
@@ -13,6 +18,9 @@ class Forbidden extends Error {
     }
 }
 
+/**
+ * Represents an error when authentication fails.
+ */
 class Unauthorized extends Error {
     constructor(message) {
         super(message);
@@ -20,6 +28,9 @@ class Unauthorized extends Error {
     }
 }
 
+/**
+ * Represents an unknown error.
+ */
 class UnknownError extends Error {
     constructor(message) {
         super(message);
@@ -27,6 +38,9 @@ class UnknownError extends Error {
     }
 }
 
+/**
+ * Represents an error when an unsupported datasource type is encountered.
+ */
 class ObjectNotSupported extends Error {
     constructor(message) {
         super(message);

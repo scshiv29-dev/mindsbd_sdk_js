@@ -1,17 +1,33 @@
-
 const axios = require('axios');
-const { ObjectNotFound, Forbidden, Unauthorized, UnknownError } = require('../models/Exceptions');
+const { ObjectNotFound, Forbidden, Unauthorized, UnknownError } = require('../../src/models/Exceptions');
 
+/**
+ * API Client for making HTTP requests to the MindsDB API.
+ */
 class APIClient {
+    /**
+     * @param {string} apiKey - The API key used for authentication.
+     * @param {string} [baseUrl='https://mdb.ai/api'] - The base URL for the API.
+     */
     constructor(apiKey, baseUrl = 'https://mdb.ai/api') {
         this.apiKey = apiKey;
         this.baseUrl = baseUrl;
     }
 
+    /**
+     * Generate headers for HTTP requests.
+     * @returns {Object} - The headers including authorization.
+     * @private
+     */
     _headers() {
         return { Authorization: `Bearer ${this.apiKey}` };
     }
 
+    /**
+     * Make a GET request to the specified URL.
+     * @param {string} url - The endpoint URL.
+     * @returns {Promise<Object>} - The response data.
+     */
     async get(url) {
         try {
             const response = await axios.get(`${this.baseUrl}${url}`, { headers: this._headers() });
@@ -21,6 +37,12 @@ class APIClient {
         }
     }
 
+    /**
+     * Make a POST request to the specified URL.
+     * @param {string} url - The endpoint URL.
+     * @param {Object} data - The data to post.
+     * @returns {Promise<Object>} - The response data.
+     */
     async post(url, data) {
         try {
             const response = await axios.post(`${this.baseUrl}${url}`, data, { headers: this._headers() });
@@ -30,6 +52,12 @@ class APIClient {
         }
     }
 
+    /**
+     * Make a PATCH request to the specified URL.
+     * @param {string} url - The endpoint URL.
+     * @param {Object} data - The data to patch.
+     * @returns {Promise<Object>} - The response data.
+     */
     async patch(url, data) {
         try {
             const response = await axios.patch(`${this.baseUrl}${url}`, data, { headers: this._headers() });
@@ -39,6 +67,11 @@ class APIClient {
         }
     }
 
+    /**
+     * Make a DELETE request to the specified URL.
+     * @param {string} url - The endpoint URL.
+     * @returns {Promise<Object>} - The response data.
+     */
     async delete(url) {
         try {
             const response = await axios.delete(`${this.baseUrl}${url}`, { headers: this._headers() });
@@ -48,6 +81,12 @@ class APIClient {
         }
     }
 
+    /**
+     * Handle HTTP responses.
+     * @param {Object} response - The HTTP response.
+     * @returns {Object} - The response data.
+     * @private
+     */
     _handleResponse(response) {
         if (response.status >= 200 && response.status < 300) {
             return response.data;
@@ -56,6 +95,12 @@ class APIClient {
         }
     }
 
+    /**
+     * Handle HTTP errors.
+     * @param {Object} error - The error object.
+     * @throws {Error} - The error depending on the response status.
+     * @private
+     */
     _handleError(error) {
         if (error.response) {
             const status = error.response.status;
