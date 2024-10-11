@@ -1,0 +1,21 @@
+{
+  "name": "mindsbd_sdk_js",
+  "version": "1.0.0",
+  "main": "index.js",
+ "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "jest": "^29.7.0",
+    "typescript": "^5.6.2"
+  }
+}
