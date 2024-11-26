@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "JavaScript SDK for interacting with MindsDB APIs",
   "main": "index.js",
+
+
   "scripts": {
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/mindsdb-sdk.git"
+    "url": "git+https://github.com/scshiv29-dev/mindsbd_sdk_js.git"
   },
   "keywords": [
     "mindsdb",
@@ -16,7 +18,7 @@
     "api",
     "javascript"
   ],
-  "author": "Your Name",
+  "author": "Shivam Deepak Chaudhary",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0"
